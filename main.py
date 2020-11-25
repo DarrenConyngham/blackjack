@@ -2,15 +2,30 @@ from random import choice
 from art import logo
 
 def deal_card():
+    """Returns one random card"""
     cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
     return choice(cards)
 
 
 def calculate_score(hand):
+    """Calculates the score of the current hand"""
     return sum(hand)
 
 
+def display_score():
+    """Prints out the current score."""
+    print(f"\tYour cards: {player_hand}, current score: {calculate_score(player_hand)} \n\tComputer's first card: {dealer_hand[0]}")
+
+
+def final_score():
+    """Displays the current score and prints out the final score."""
+    display_score()
+    print(f"\tYour final hand: {player_hand}, final_score: {calculate_score(player_hand)}")
+    print(f"\tComputer's final hand: {dealer_hand}, final_score: {calculate_score(dealer_hand)}")
+
+
 def main_menu():
+    """Displays the main menu and initiates the game play"""
     print(logo)
     answer = input("Do you want to play a game of of blackjack? ")
     if answer.lower() == 'y':
@@ -20,6 +35,7 @@ def main_menu():
 
 
 def game_play():
+    """The main game play of the game"""
     global player_hand
     player_hand = [deal_card(), deal_card()]
 
@@ -41,10 +57,11 @@ def game_play():
         play_more = input("Type 'y' to get another card, type 'n' to pass: ")
 
     end_game_conditions()
-    game_play()
+    game_play() 
 
 
 def end_game_conditions():
+    """Calculates and displays the end game output"""
     final_score()
     if calculate_score(player_hand) > 21:
         print("You went over you lose :(")      
@@ -61,15 +78,6 @@ def end_game_conditions():
 
     main_menu()
 
-
-def display_score():
-    print(f"\tYour cards: {player_hand}, current score: {calculate_score(player_hand)} \n\tComputer's first card: {dealer_hand[0]}")
-
-
-def final_score():
-    display_score()
-    print(f"\tYour final hand: {player_hand}, final_score: {calculate_score(player_hand)}")
-    print(f"\tComputer's final hand: {dealer_hand}, final_score: {calculate_score(dealer_hand)}")
 
 if __name__ == '__main__':
     main_menu()
