@@ -9,6 +9,9 @@ def deal_card():
 
 def calculate_score(hand):
     """Calculates the score of the current hand"""
+    if sum(hand) > 21 and 11 in hand:
+        hand.remove(11)
+        hand.append(1)
     return sum(hand)
 
 
