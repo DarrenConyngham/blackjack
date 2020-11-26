@@ -52,6 +52,8 @@ def game_play():
 
     while play_more == 'y': 
         player_hand.append(deal_card())
+        if calculate_score(player_hand) == 21 and len(player_hand)==2:
+            break
         if calculate_score(player_hand) > 21:
             break
         if calculate_score(dealer_hand) < 17:
@@ -67,8 +69,9 @@ def end_game_conditions():
     """Calculates and displays the end game output"""
     final_score()
     if calculate_score(player_hand) > 21:
-        print("You went over you lose :(")      
-
+        print("You went over you lose :(")
+    elif calculate_score(player_hand) == 21 and len(player_hand)==2:
+        print("You win with a blackjack!")
     elif play_more != 'y':
         if calculate_score(dealer_hand) > 21:
             print("Computer went over. You win.")
